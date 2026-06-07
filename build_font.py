@@ -4,8 +4,9 @@
 import os
 import fontforge
 
-SVG_DIR = os.path.dirname(os.path.abspath(__file__))
-OUT_PATH = os.path.join(SVG_DIR, "OuchV2.ttf")
+ROOT = os.path.dirname(os.path.abspath(__file__))
+SVG_DIR = os.path.join(ROOT, "glyphs")
+OUT_PATH = os.path.join(ROOT, "OuchV2.ttf")
 
 EM = 1000
 ADV = 650

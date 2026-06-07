@@ -6,8 +6,9 @@ import re
 import math
 import html
 
-SVG_DIR = os.path.dirname(os.path.abspath(__file__))
-OUT_PATH = os.path.join(SVG_DIR, "glyphs.svg")
+ROOT = os.path.dirname(os.path.abspath(__file__))
+SVG_DIR = os.path.join(ROOT, "glyphs")
+OUT_PATH = os.path.join(ROOT, "glyphs.svg")
 
 COLS = 13
 CELL_W = 90
