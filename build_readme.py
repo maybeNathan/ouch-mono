@@ -15,9 +15,6 @@ pdfmetrics.registerFont(TTFont("OuchV2", FONT_PATH))
 
 W, H = A4
 MARGIN = 48
-LINE = lambda y, w=W, m=MARGIN: None  # helper stub
-
-RULE_Y = None  # filled below
 
 
 def rule(c, y):
@@ -26,8 +23,8 @@ def rule(c, y):
     c.line(MARGIN, y, W - MARGIN, y)
 
 
-def heading(c, text, y, size=10):
-    c.setFont("Helvetica", size)
+def heading(c, text, y):
+    c.setFont("Helvetica", 9)
     c.setFillColorRGB(0.45, 0.45, 0.45)
     c.drawString(MARGIN, y, text.upper())
     c.setFillColorRGB(0, 0, 0)
@@ -51,10 +48,9 @@ def main():
     rule(c, y)
     y -= 20
 
-    # --- Full character set ---
+    # Full character set
     heading(c, "Full character set", y)
     y -= 18
-
     char_rows = [
         '! " # $ % & \' ( ) * + , - . / 0 1 2 3 4 5 6 7',
         '8 9 : ; < = > ? @ A B C D E F G H I J K L M N O',
@@ -68,7 +64,6 @@ def main():
         y -= 26
     y -= 6
 
-    # Extended
     heading(c, "Extended", y)
     y -= 18
     c.setFont("OuchV2", 18)
@@ -78,31 +73,27 @@ def main():
     rule(c, y)
     y -= 20
 
-    # --- Size specimens ---
+    # Size specimens
     heading(c, "Size specimens", y)
     y -= 4
-
-    sizes = [36, 24, 18, 14, 11]
-    sample = "the quick brown fox"
-    for sz in sizes:
+    for sz in [36, 24, 18, 14, 11]:
         y -= sz + 6
         c.setFont("OuchV2", sz)
-        c.drawString(MARGIN, y, sample)
+        c.drawString(MARGIN, y, "the quick brown fox")
     y -= 20
 
     rule(c, y)
     y -= 20
 
-    # --- Pangrams ---
+    # Pangrams
     heading(c, "Pangrams", y)
     y -= 18
-    pangrams = [
+    c.setFont("OuchV2", 13)
+    for p in [
         "the quick brown fox jumps over the lazy dog",
         "pack my box with five dozen liquor jugs",
         "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
-    ]
-    c.setFont("OuchV2", 13)
-    for p in pangrams:
+    ]:
         c.drawString(MARGIN, y, p)
         y -= 18
     y -= 10
@@ -110,10 +101,12 @@ def main():
     rule(c, y)
     y -= 20
 
-    # --- Code sample ---
+    # Code sample
     heading(c, "Code sample", y)
     y -= 18
-    code = [
+    c.setFont("OuchV2", 11)
+    c.setFillColorRGB(0.1, 0.1, 0.1)
+    for line in [
         "fn greet(name: &str) -> String {",
         '    format!("hello, {}!", name)',
         "}",
@@ -127,10 +120,7 @@ def main():
         '    "sub" => a - b,',
         "    _     => 0,",
         "};",
-    ]
-    c.setFont("OuchV2", 11)
-    c.setFillColorRGB(0.1, 0.1, 0.1)
-    for line in code:
+    ]:
         c.drawString(MARGIN, y, line)
         y -= 15
 
